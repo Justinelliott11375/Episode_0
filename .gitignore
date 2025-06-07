@@ -1,0 +1,63 @@
+# Unity-generated folders
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+MemoryCaptures/
+
+# User-specific files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# Unity auto-generated
+*.apk
+*.aab
+*.mdb
+*.opendb
+*.VC.db
+sysinfo.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE-specific
+.vscode/
+.vs/
+.idea/
+*.code-workspace
+
+# Version control leftovers
+*.orig
+
+# Plastic SCM
+.plastic/
+.plastic
+
+# Crash reports
+sysinfo.txt
+
+# Shader cache
+*.shadercache
+*.cginc.meta
+
+# Aseprite
+*.aseprite-preview
+*.aseprite-data
+
+# Unity cache server (if enabled)
+Cache/
+
+# Unity Cloud Build
+unitycloudbuild-manifest.json
