@@ -10,14 +10,17 @@ public class PlayerMovement : MonoBehaviour
 	
 	private Animator animator;
 	private Vector2 Iswalking;
-	
+
+    private SpriteRenderer spriteRenderer;//Flip right animation
+
 
     // Start is called before the first frame update
     void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-	}
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Initialize the SpriteRenderer
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -53,8 +56,32 @@ public class PlayerMovement : MonoBehaviour
 
 		}
 
+        // Get input from the player
 
-        
+        /*movement.x = InputX;
+        movement.y = InputY;*/
+
+        // Flip sprite if moving right only
+        if (InputX == 1 && InputY == 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        /*if ((InputX == 0 && InputY == 0) && (movement.x != 0 || movement.y != 0))
+        {
+            Iswalking = movement;
+        }
+        if ((InputX == 1 && InputY == 0))
+        {
+            Iswalking = movement;
+        }*/
+
+
+
 
 
     }
