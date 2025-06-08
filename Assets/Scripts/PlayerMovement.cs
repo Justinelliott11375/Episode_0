@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class PlayerMovement : MonoBehaviour
 {
 	public float moveSpeed = 5f;
 	private Rigidbody2D rb;
 	private Vector2 movement;
+	private Vector2 lastMovementDirection;
+
 
 	private Animator animator;
-	private Vector2 Iswalking;
 
-    private SpriteRenderer spriteRenderer;//Flip right animation
+    private SpriteRenderer spriteRenderer;
+	private PlayerInputProcessor inputProcessor = new PlayerInputProcessor();
 
 
     // Start is called before the first frame update
-    void Start()
+	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Initialize the SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 	// Update is called once per frame
@@ -27,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 	{
 		ProcessInputs();
 		Animate();
-
-
     }
 
 	void FixedUpdate()
@@ -38,65 +39,24 @@ public class PlayerMovement : MonoBehaviour
 
     void ProcessInputs()
     {
+		float inputX = Input.GetAxisRaw("Horizontal");
+		float inputY = Input.GetAxisRaw("Vertical");
 
-		float InputX = Input.GetAxisRaw("Horizontal");
-		float InputY = Input.GetAxisRaw("Vertical");
+		movement = inputProcessor.GetMovementVector(inputX, inputY);
 
-        //needs if statement asking is getting input set inputx/y bool to false
-
-
-        // Get input from the player
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-
-		if ((InputX == 0 && InputY == 0) && (movement.x != 0 || movement.y != 0))
+		if (movement != Vector2.zero)
 		{
-			Iswalking = movement;
-
+			lastMovementDirection = movement.normalized;
 		}
 
-        // Get input from the player
-
-        /*movement.x = InputX;
-        movement.y = InputY;*/
-
-        // Flip sprite if moving right only
-        if (InputX == 1 && InputY == 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
-
-        /*if ((InputX == 0 && InputY == 0) && (movement.x != 0 || movement.y != 0))
-        {
-            Iswalking = movement;
-        }
-        if ((InputX == 1 && InputY == 0))
-        {
-            Iswalking = movement;
-        }*/
-
-
-
-
-
+		spriteRenderer.flipX = inputProcessor.ShouldFlipSprite(inputX, inputY);
     }
 	void Animate()
 	{
-
         animator.SetFloat("InputX", movement.x);
         animator.SetFloat("InputY", movement.y);
-		animator.SetFloat("Iswalking 0", movement.magnitude);
 
+		float speed = inputProcessor.GetSpeed(movement);
+		animator.SetFloat("Speed", speed);
     }
-
-
-
-
-
-
 }
