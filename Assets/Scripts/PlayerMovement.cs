@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 	public float moveSpeed = 5f;
 	private Rigidbody2D rb;
 	private Vector2 movement;
-	
+
 	private Animator animator;
 	private Vector2 Iswalking;
 
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
 		float InputX = Input.GetAxisRaw("Horizontal");
 		float InputY = Input.GetAxisRaw("Vertical");
-        
+
         //needs if statement asking is getting input set inputx/y bool to false
 
 
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("InputX", movement.x);
         animator.SetFloat("InputY", movement.y);
 		animator.SetFloat("Iswalking 0", movement.magnitude);
-		
+
     }
 
 
